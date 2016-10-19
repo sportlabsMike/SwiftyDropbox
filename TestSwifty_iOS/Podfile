@@ -1,6 +1,6 @@
 use_frameworks!
 
-target "TestSwifty_macOS" do
+target "TestSwifty_iOS" do
     pod 'SwiftyDropbox', :path => '../'
 end
 

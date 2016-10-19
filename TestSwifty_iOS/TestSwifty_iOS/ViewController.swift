@@ -2,106 +2,109 @@
 /// Copyright (c) 2016 Dropbox, Inc. All rights reserved.
 ///
 
-import Cocoa
+import UIKit
 import SwiftyDropbox
 
-class ViewController: NSViewController {
-    @IBOutlet weak var oauthLinkButton: NSButton!
-    @IBOutlet weak var oauthLinkBrowserButton: NSButton!
-    @IBOutlet weak var oauthUnlinkButton: NSButton!
-    @IBOutlet weak var runApiTestsButton: NSButton!
+class ViewController: UIViewController {
+    @IBOutlet weak var runTestsButton: UIButton!
+    @IBOutlet weak var linkButton: UIButton!
+    @IBOutlet weak var linkBrowserButton: UIButton!
+    @IBOutlet weak var unlinkButton: UIButton!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-    override func viewWillAppear() {
+    @IBAction func linkButtonPressed(_ sender: AnyObject) {
+        DropboxClientsManager.authorizeFromController(UIApplication.shared, controller: self, openURL: {(url: URL) -> Void in UIApplication.shared.openURL(url)})
     }
 
-    @IBAction func oauthLinkButtonPressed(_ sender: AnyObject) {
-        if DropboxClientsManager.authorizedClient == nil && DropboxClientsManager.authorizedTeamClient == nil {
-            DropboxClientsManager.authorizeFromController(sharedWorkspace: NSWorkspace.shared(), controller: self, openURL: {(url: URL) -> Void in NSWorkspace.shared().open(url)})
-        }
+    @IBAction func linkBrowserButtonPressed(_ sender: AnyObject) {
+        DropboxClientsManager.authorizeFromController(UIApplication.shared, controller: self, openURL: {(url: URL) -> Void in UIApplication.shared.openURL(url)}, browserAuth: true)
     }
 
-    @IBAction func oauthLinkBrowserButtonPressed(_ sender: AnyObject) {
-        DropboxClientsManager.unlinkClients()
-        DropboxClientsManager.authorizeFromController(sharedWorkspace: NSWorkspace.shared(), controller: self, openURL: {(url: URL) -> Void in NSWorkspace.shared().open(url)}, browserAuth: true)
-    }
-
-    @IBAction func oauthUnlinkButtonPressed(_ sender: AnyObject) {
+    @IBAction func unlinkButtonPressed(_ sender: AnyObject) {
         DropboxClientsManager.unlinkClients()
         checkButtons()
     }
-    
-    @IBAction func runApiTestsButtonPressed(_ sender: AnyObject) {
-        if DropboxClientsManager.authorizedClient != nil || DropboxClientsManager.authorizedTeamClient != nil {
-            let unlink = {
-                DropboxClientsManager.unlinkClients()
-                self.checkButtons()
-            }
-            
-            switch(appPermission) {
-            case .fullDropbox:
-                testAllUserEndpoints(nextTest: unlink)
-            case .teamMemberFileAccess:
-                testTeamMemberFileAcessActions(unlink)
-            case .teamMemberManagement:
-                testTeamMemberManagementActions(unlink)
-            }
+
+    @IBAction func runTestsButtonPressed(_ sender: AnyObject) {
+        let unlink = {
+            DropboxClientsManager.unlinkClients()
+            self.checkButtons()
         }
+        
+        switch(appPermission) {
+        case .fullDropbox:
+            testAllUserEndpoints(nextTest: unlink)
+        case .teamMemberFileAccess:
+            testTeamMemberFileAcessActions(unlink)
+        case .teamMemberManagement:
+            testTeamMemberManagementActions(unlink)
+        }
+    }
+
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        checkButtons()
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
 
     func checkButtons() {
         if DropboxClientsManager.authorizedClient != nil || DropboxClientsManager.authorizedTeamClient != nil {
-            oauthLinkButton.isHidden = true
-            oauthLinkBrowserButton.isHidden = true
-            oauthUnlinkButton.isHidden = false
-            runApiTestsButton.isHidden = false
+            linkButton.isHidden = true
+            linkBrowserButton.isHidden = true
+            unlinkButton.isHidden = false
+            runTestsButton.isHidden = false
         } else {
-            oauthLinkButton.isHidden = false
-            oauthLinkBrowserButton.isHidden = false
-            oauthUnlinkButton.isHidden = true
-            runApiTestsButton.isHidden = true
+            linkButton.isHidden = false
+            linkBrowserButton.isHidden = false
+            unlinkButton.isHidden = true
+            runTestsButton.isHidden = true
         }
     }
-    
+
     /**
-     To run these unit tests, you will need to do the following:
-     
-     Navigate to TestSwifty/ and run `pod install` to install AlamoFire dependencies.
-     
-     There are three types of unit tests here:
-     
-     1.) Regular Dropbox User API tests (requires app with 'Full Dropbox' permissions)
-     2.) Dropbox Business API tests (requires app with 'Team member file access' permissions)
-     3.) Dropbox Business API tests (requires app with 'Team member management' permissions)
-     
-     To run all of these tests, you will need three apps, one for each of the above permission types.
-     
-     You must test these apps one at a time.
-     
-     Once you have these apps, you will need to do the following:
-     
-     1.) Fill in user-specific data in `TestData` and `TestTeamData` in TestData.swift
-     2.) For each of the above apps, you will need to add a user-specific app key. For each test run, you
-     will need to call `DropboxClientsManager.setupWithAppKey` (or `DropboxClientsManager.setupWithTeamAppKey`) and supply the
-     appropriate app key value, in AppDelegate.swift
-     3.) Depending on which app you are currently testing, you will need to toggle the `appPermission` variable
-     in AppDelegate.swift to the appropriate value.
-     4.) For each of the above apps, you will need to add a user-specific URL scheme in Info.plist >
-     URL types > Item 0 (Editor) > URL Schemes > click '+'. URL scheme value should be 'db-<APP KEY>'
-     where '<APP KEY>' is value of your particular app's key
-     
-     To create an app or to locate your app's app key, please visit the App Console here:
-     
-     https://www.dropbox.com/developers/apps
-     */
-    
+        To run these unit tests, you will need to do the following:
+
+        Navigate to TestSwifty/ and run `pod install` to install AlamoFire dependencies.
+
+        There are three types of unit tests here:
+
+        1.) Regular Dropbox User API tests (requires app with 'Full Dropbox' permissions)
+        2.) Dropbox Business API tests (requires app with 'Team member file access' permissions)
+        3.) Dropbox Business API tests (requires app with 'Team member management' permissions)
+
+        To run all of these tests, you will need three apps, one for each of the above permission types.
+
+        You must test these apps one at a time.
+
+        Once you have these apps, you will need to do the following:
+
+        1.) Fill in user-specific data in `TestData` and `TestTeamData` in TestData.swift
+        2.) For each of the above apps, you will need to add a user-specific app key. For each test run, you
+            will need to call `DropboxClientsManager.setupWithAppKey` (or `DropboxClientsManager.setupWithTeamAppKey`) and supply the
+            appropriate app key value, in AppDelegate.swift
+        3.) Depending on which app you are currently testing, you will need to toggle the `appPermission` variable
+            in AppDelegate.swift to the appropriate value.
+        4.) For each of the above apps, you will need to add a user-specific URL scheme in Info.plist >
+            URL types > Item 0 (Editor) > URL Schemes > click '+'. URL scheme value should be 'db-<APP KEY>'
+            where '<APP KEY>' is value of your particular app's key
+
+        To create an app or to locate your app's app key, please visit the App Console here:
+
+        https://www.dropbox.com/developers/apps
+    */
+
     // Test user app with 'Full Dropbox' permission
     func testAllUserEndpoints(_ asMember: Bool = false, nextTest: (() -> Void)? = nil) {
         let tester = DropboxTester()
-        
+
         let end = {
             if let nextTest = nextTest {
                 nextTest()
@@ -121,14 +124,14 @@ class ViewController: NSViewController {
         let start = {
             self.testFilesActions(tester, nextTest: testSharingActions, asMember: asMember)
         }
-        
+
         start()
     }
-    
+
     // Test business app with 'Team member file access' permission
     func testTeamMemberFileAcessActions(_ nextTest: (() -> Void)? = nil) {
         let tester = DropboxTeamTester()
-        
+
         let end = {
             if let nextTest = nextTest {
                 nextTest()
@@ -142,14 +145,14 @@ class ViewController: NSViewController {
         let start = {
             self.testTeamMemberFileAcessActions(tester, nextTest: testPerformActionAsMember)
         }
-        
+
         start()
     }
     
     // Test business app with 'Team member management' permission
     func testTeamMemberManagementActions(_ nextTest: (() -> Void)? = nil) {
         let tester = DropboxTeamTester()
-        
+
         let end = {
             if let nextTest = nextTest {
                 nextTest()
@@ -160,13 +163,13 @@ class ViewController: NSViewController {
         let start = {
             self.testTeamMemberManagementActions(tester, nextTest: end)
         }
-        
+
         start()
     }
-    
+
     func testFilesActions(_ dropboxTester: DropboxTester, nextTest: @escaping (() -> Void), asMember: Bool = false) {
         let tester = FilesTests(tester: dropboxTester)
-        
+
         let end = {
             TestFormat.printTestEnd()
             nextTest()
@@ -230,14 +233,14 @@ class ViewController: NSViewController {
         let start = {
             delete()
         }
-        
+
         TestFormat.printTestBegin(#function)
         start()
     }
-    
+
     func testSharingActions(_ dropboxTester: DropboxTester, nextTest: @escaping (() -> Void)) {
         let tester = SharingTests(tester: dropboxTester)
-        
+
         let end = {
             TestFormat.printTestEnd()
             nextTest()
@@ -287,14 +290,14 @@ class ViewController: NSViewController {
         let start = {
             shareFolder()
         }
-        
+
         TestFormat.printTestBegin(#function)
         start()
     }
-    
+
     func testUserActions(_ dropboxTester: DropboxTester, nextTest: @escaping (() -> Void)) {
         let tester = UserTests(tester: dropboxTester)
-        
+
         let end = {
             TestFormat.printTestEnd()
             nextTest()
@@ -314,14 +317,14 @@ class ViewController: NSViewController {
         let start = {
             getAccount()
         }
-        
+
         TestFormat.printTestBegin(#function)
         start()
     }
     
     func testAuthActions(_ dropboxTester: DropboxTester, nextTest: @escaping (() -> Void)) {
         let tester = AuthTests(tester: dropboxTester)
-        
+
         let end = {
             TestFormat.printTestEnd()
             nextTest()
@@ -332,14 +335,14 @@ class ViewController: NSViewController {
         let start = {
             tokenRevoke()
         }
-        
+
         TestFormat.printTestBegin(#function)
         start()
     }
-    
+
     func testTeamMemberFileAcessActions(_ dropboxTester: DropboxTeamTester, nextTest: @escaping (() -> Void)) {
         let tester = TeamTests(tester: dropboxTester)
-        
+
         let end = {
             TestFormat.printTestEnd()
             nextTest()
@@ -377,14 +380,14 @@ class ViewController: NSViewController {
         let start = {
             initMembersGetInfo()
         }
-        
+
         TestFormat.printTestBegin(#function)
         start()
     }
-    
+
     func testTeamMemberManagementActions(_ dropboxTester: DropboxTeamTester, nextTest: @escaping (() -> Void)) {
         let tester = TeamTests(tester: dropboxTester)
-        
+
         let end = {
             TestFormat.printTestEnd()
             nextTest()
@@ -437,9 +440,8 @@ class ViewController: NSViewController {
         let start = {
             initMembersGetInfo()
         }
-        
+
         TestFormat.printTestBegin(#function)
         start()
     }
 }
-

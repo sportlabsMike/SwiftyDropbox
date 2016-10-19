@@ -1,5 +1,0 @@
-use_frameworks!
-
-target "TestSwifty" do
-    pod 'SwiftyDropbox', :path => '../'
-end
