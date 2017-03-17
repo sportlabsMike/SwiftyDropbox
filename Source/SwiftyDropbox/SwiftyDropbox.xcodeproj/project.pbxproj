@@ -10,7 +10,6 @@
 		7F81ECAE1E7B0671004A0264 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F81ECAD1E7B0670004A0264 /* Alamofire.framework */; };
 		F25D1B861D9776A500B748CF /* SwiftyDropbox.h in Headers */ = {isa = PBXBuildFile; fileRef = F25D1B851D9776A500B748CF /* SwiftyDropbox.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F25D1B881D97772400B748CF /* SwiftyDropbox.h in Headers */ = {isa = PBXBuildFile; fileRef = F25D1B851D9776A500B748CF /* SwiftyDropbox.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F2C54AA01D89F6FA003A2675 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2C54A9F1D89F6FA003A2675 /* Alamofire.framework */; };
 		F2C6FD371D89E37500E0DD9E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2C6FD361D89E37500E0DD9E /* Foundation.framework */; };
 		F2C6FD391D89E37A00E0DD9E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2C6FD381D89E37A00E0DD9E /* UIKit.framework */; };
 		F2C6FD3B1D89E38200E0DD9E /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2C6FD3A1D89E38200E0DD9E /* AppKit.framework */; };
@@ -72,8 +71,6 @@
 /* Begin PBXFileReference section */
 		7F81ECAD1E7B0670004A0264 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/RACTournaments-ccacfvkaohbelucxssbftfftiiua/Build/Products/Debug-iphoneos/Alamofire.framework"; sourceTree = "<group>"; };
 		F25D1B851D9776A500B748CF /* SwiftyDropbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyDropbox.h; sourceTree = "<group>"; };
-		F2C54A9D1D89F6F0003A2675 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = ../../Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
-		F2C54A9F1D89F6FA003A2675 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = ../../Carthage/Build/Mac/Alamofire.framework; sourceTree = "<group>"; };
 		F2C6FCC51D89E16800E0DD9E /* SwiftyDropbox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyDropbox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2C6FCD51D89E1A900E0DD9E /* SwiftyDropbox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyDropbox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2C6FD361D89E37500E0DD9E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -128,7 +125,6 @@
 			files = (
 				F2C6FD3D1D89E38800E0DD9E /* Foundation.framework in Frameworks */,
 				F2C6FD3B1D89E38200E0DD9E /* AppKit.framework in Frameworks */,
-				F2C54AA01D89F6FA003A2675 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,8 +155,6 @@
 			isa = PBXGroup;
 			children = (
 				7F81ECAD1E7B0670004A0264 /* Alamofire.framework */,
-				F2C54A9F1D89F6FA003A2675 /* Alamofire.framework */,
-				F2C54A9D1D89F6F0003A2675 /* Alamofire.framework */,
 				F2C6FD3C1D89E38800E0DD9E /* Foundation.framework */,
 				F2C6FD3A1D89E38200E0DD9E /* AppKit.framework */,
 				F2C6FD381D89E37A00E0DD9E /* UIKit.framework */,
