@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7FC53C7B1E854160008ADB32 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FC53C7A1E854160008ADB32 /* Alamofire.framework */; };
+		7FAED26A1EAA61000082F7AC /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FC53C7A1E854160008ADB32 /* Alamofire.framework */; };
 		F25D1B861D9776A500B748CF /* SwiftyDropbox.h in Headers */ = {isa = PBXBuildFile; fileRef = F25D1B851D9776A500B748CF /* SwiftyDropbox.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F25D1B881D97772400B748CF /* SwiftyDropbox.h in Headers */ = {isa = PBXBuildFile; fileRef = F25D1B851D9776A500B748CF /* SwiftyDropbox.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F2C6FD371D89E37500E0DD9E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2C6FD361D89E37500E0DD9E /* Foundation.framework */; };
@@ -113,7 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7FC53C7B1E854160008ADB32 /* Alamofire.framework in Frameworks */,
+				7FAED26A1EAA61000082F7AC /* Alamofire.framework in Frameworks */,
 				F2C6FD371D89E37500E0DD9E /* Foundation.framework in Frameworks */,
 				F2C6FD391D89E37A00E0DD9E /* UIKit.framework in Frameworks */,
 			);
@@ -472,6 +472,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -561,6 +562,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -657,6 +659,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -755,6 +758,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -900,7 +904,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -921,6 +927,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
